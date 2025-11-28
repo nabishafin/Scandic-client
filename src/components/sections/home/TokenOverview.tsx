@@ -6,13 +6,14 @@ import GlassPanel from '../../ui/GlassPanel';
 export function TokenOverview() {
   return (
     <section className="py-32 px-6 lg:px-12">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <SectionTitle subtitle="Transparent tokenomics designed for long-term stability and growth">
           Token Overview
         </SectionTitle>
 
+        {/* Top Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <GlassPanel delay={0}>
+          <GlassPanel delay={0} className="transition-all duration-300 hover:border-[var(--gold)]">
             <div className="text-center">
               <p className="text-xs text-[var(--text-secondary)] mb-3 uppercase tracking-wider">
                 Total Supply
@@ -26,7 +27,7 @@ export function TokenOverview() {
             </div>
           </GlassPanel>
 
-          <GlassPanel delay={0.1}>
+          <GlassPanel delay={0.1} className="transition-all duration-300 hover:border-[var(--gold)]">
             <div className="text-center">
               <p className="text-xs text-[var(--text-secondary)] mb-3 uppercase tracking-wider">
                 Token Holders
@@ -40,7 +41,7 @@ export function TokenOverview() {
             </div>
           </GlassPanel>
 
-          <GlassPanel delay={0.2}>
+          <GlassPanel delay={0.2} className="transition-all duration-300 hover:border-[var(--gold)]">
             <div className="text-center">
               <p className="text-xs text-[var(--text-secondary)] mb-3 uppercase tracking-wider">
                 Circulating Supply
@@ -55,6 +56,7 @@ export function TokenOverview() {
           </GlassPanel>
         </div>
 
+        {/* Allocation & Stability Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,8 +64,9 @@ export function TokenOverview() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16"
         >
-          <GlassPanel>
+          <GlassPanel className="transition-all duration-300 hover:border-[var(--gold)]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Allocation Strategy */}
               <div>
                 <h3 className="text-2xl font-semibold text-[var(--gold)] mb-6">
                   Allocation Strategy
@@ -77,13 +80,9 @@ export function TokenOverview() {
                     { label: 'Marketing & Partnerships', value: 10 }
                   ].map((item, index) => (
                     <div key={item.label}>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm text-[var(--text-secondary)]">
-                          {item.label}
-                        </span>
-                        <span className="text-sm font-mono text-[var(--gold)]">
-                          {item.value}%
-                        </span>
+                      <div className="flex justify-between mb-2 p-2 rounded transition-all duration-300 hover:border-[var(--gold)]">
+                        <span className="text-sm text-[var(--text-secondary)]">{item.label}</span>
+                        <span className="text-sm font-mono text-[var(--gold)]">{item.value}%</span>
                       </div>
                       <motion.div
                         className="h-2 bg-[var(--bg-secondary)] rounded-full overflow-hidden"
@@ -104,6 +103,7 @@ export function TokenOverview() {
                 </div>
               </div>
 
+              {/* Long-Term Stability */}
               <div>
                 <h3 className="text-2xl font-semibold text-[var(--gold)] mb-6">
                   Long-Term Stability

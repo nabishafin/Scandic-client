@@ -31,7 +31,7 @@ export function KeyHighlights() {
   ];
 
   return (
-    <section className="py-20 px-6 lg:px-12">
+    <section className=" px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 justify-items-center">
           {highlights.map((highlight, index) => (
@@ -53,7 +53,7 @@ export function KeyHighlights() {
                 duration: 0.6,
                 delay: index * 0.1
               }}
-              className="glass-panel rounded-xl p-6 group hover:border-[var(--gold)] transition-all duration-300 w-full max-w-xs"
+              className="glass-panel rounded-xl p-6 group hover:border-[var(--gold)] transition-all duration-300 w-full "
             >
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--gold-light)] to-[var(--gold)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <highlight.icon size={24} className="text-[var(--bg-primary)]" />

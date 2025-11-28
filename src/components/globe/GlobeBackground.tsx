@@ -26,7 +26,7 @@ export function GlobeBackground() {
     y: globeY,
     scale: globeScale
   }}>
-      <motion.div className="w-full h-full" animate={{
+    <motion.div className="w-full h-full" animate={{
       x: mousePosition.x,
       y: mousePosition.y
     }} transition={{
@@ -34,11 +34,11 @@ export function GlobeBackground() {
       stiffness: 50,
       damping: 20
     }}>
-        <AnimatedGlobe />
-      </motion.div>
+      <AnimatedGlobe />
+    </motion.div>
 
-      {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[var(--bg-primary)]/30 to-[var(--bg-primary)]/80 pointer-events-none" />
-    </motion.div>;
+    {/* Gradient overlay for text readability */}
+    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[var(--bg-primary)]/30 to-[var(--bg-primary)]/80 pointer-events-none" />
+  </motion.div>;
 }
 export default GlobeBackground;

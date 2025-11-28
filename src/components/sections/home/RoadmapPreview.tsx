@@ -28,7 +28,7 @@ export function RoadmapPreview() {
     status: 'upcoming'
   }];
   return <section className="py-32 px-6 lg:px-12">
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <SectionTitle subtitle="Transparent milestones driving toward global utility and adoption.">
         Our Journey
       </SectionTitle>

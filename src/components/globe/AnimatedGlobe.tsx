@@ -47,32 +47,32 @@ export function AnimatedGlobe() {
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     globeGroup.add(sphere);
     // Latitude lines
-    for (let i = 0; i < 8; i++) {
-      const lat = (i - 3.5) * 0.4;
-      const radius = Math.sqrt(4 - lat * lat);
-      const torusGeometry = new THREE.TorusGeometry(radius, 0.005, 16, 100);
-      const torusMaterial = new THREE.MeshBasicMaterial({
-        color: 0xd4af37,
-        transparent: true,
-        opacity: 0.4
-      });
-      const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-      torus.position.y = lat;
-      globeGroup.add(torus);
-    }
-    // Longitude lines
-    for (let i = 0; i < 12; i++) {
-      const torusGeometry = new THREE.TorusGeometry(2, 0.005, 16, 100);
-      const torusMaterial = new THREE.MeshBasicMaterial({
-        color: 0xd4af37,
-        transparent: true,
-        opacity: 0.4
-      });
-      const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-      torus.rotation.x = Math.PI / 2;
-      torus.rotation.z = i * Math.PI / 6;
-      globeGroup.add(torus);
-    }
+    // for (let i = 0; i < 8; i++) {
+    //   const lat = (i - 3.5) * 0.4;
+    //   const radius = Math.sqrt(4 - lat * lat);
+    //   const torusGeometry = new THREE.TorusGeometry(radius, 0.005, 16, 100);
+    //   const torusMaterial = new THREE.MeshBasicMaterial({
+    //     color: 0xd4af37,
+    //     transparent: true,
+    //     opacity: 0.4
+    //   });
+    //   const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    //   torus.position.y = lat;
+    //   globeGroup.add(torus);
+    // }
+    // // Longitude lines
+    // for (let i = 0; i < 12; i++) {
+    //   const torusGeometry = new THREE.TorusGeometry(2, 0.005, 16, 100);
+    //   const torusMaterial = new THREE.MeshBasicMaterial({
+    //     color: 0xd4af37,
+    //     transparent: true,
+    //     opacity: 0.4
+    //   });
+    //   const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    //   torus.rotation.x = Math.PI / 2;
+    //   torus.rotation.z = i * Math.PI / 6;
+    //   globeGroup.add(torus);
+    // }
     // Particles
     const particleCount = 50;
     const positions = new Float32Array(particleCount * 3);
@@ -177,6 +177,6 @@ export function AnimatedGlobe() {
       glowMaterial.dispose();
     };
   }, []);
-  return <div ref={containerRef} className="w-full h-full" />;
+  return <div ref={containerRef} className="w-full h-full " />;
 }
 export default AnimatedGlobe;

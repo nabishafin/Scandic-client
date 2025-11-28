@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import Button from '../../ui/Button';
 import LiveTicker from '../../ui/LiveTicker';
 export function HeroSection() {
-  return <section className="min-h-screen flex items-center justify-center px-6 lg:px-12 pt-32 pb-20">
-    <div className="max-w-5xl mx-auto text-center">
+  return <section className="min-h-screen flex items-center justify-center px-6 lg:px-12 pt-32 pb-20 py-32 px-6 lg:px-12">
+    <div className="max-w-7xl mx-auto text-center py-16">
       <motion.h1 initial={{
         opacity: 0,
         y: 30
@@ -30,7 +30,7 @@ export function HeroSection() {
         duration: 0.8,
         delay: 0.1,
         ease: 'easeOut'
-      }} className="text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto mb-10 leading-relaxed">
+      }} className="text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto mb-10 leading-relaxed px-8">
         Scandic Coin (SNC) is a regulated utility token connecting aviation,
         real estate, data, and lifestyle under one blockchain ecosystem.
         Experience seamless transactions across multiple industries with

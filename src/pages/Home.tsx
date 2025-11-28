@@ -7,7 +7,7 @@ import EcosystemPreview from '../components/sections/home/EcosystemPreview';
 import RoadmapPreview from '../components/sections/home/RoadmapPreview';
 import CommunityBanner from '../components/sections/home/CommunityBanner';
 export function Home() {
-  return <div className="relative">
+  return <div className="relative ">
     <GlobeBackground />
     <div className="relative z-10">
       <HeroSection />
