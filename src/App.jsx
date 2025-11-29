@@ -8,6 +8,7 @@ import About from './pages/About';
 import Roadmap from './pages/Roadmap';
 import Ecosystem from './pages/Ecosystem';
 import HowToBuy from './pages/HowToBuy';
+import BuyCoins from './pages/BuyCoins';
 import Whitepapers from './pages/Whitepapers';
 import Contact from './pages/Contact';
 
@@ -25,6 +26,7 @@ export function App() {
                     <Route path="/roadmap" element={<Roadmap />} />
                     <Route path="/ecosystem" element={<Ecosystem />} />
                     <Route path="/how-to-buy" element={<HowToBuy />} />
+                    <Route path="/buy-coins" element={<BuyCoins />} />
                     <Route path="/whitepapers" element={<Whitepapers />} />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>

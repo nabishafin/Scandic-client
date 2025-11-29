@@ -37,7 +37,7 @@ export function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
                     className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
                 >
-                    <Link to="/how-to-buy">
+                    <Link to="/buy-coins">
                         <Button size="lg" className="group">
                             <span className="flex items-center space-x-2">
                                 <span>Buy SNC</span>

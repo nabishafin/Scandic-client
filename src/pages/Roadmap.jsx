@@ -98,7 +98,7 @@ const Roadmap = () => {
     ];
 
     return (
-        <div className="w-full">
+        <div className="w-full pt-50">
             {/* Hero Section */}
             <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20 bg-none">
                 <div className="absolute inset-0 pointer-events-none opacity-30">

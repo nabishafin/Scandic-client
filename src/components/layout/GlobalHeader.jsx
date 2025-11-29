@@ -53,8 +53,8 @@ export function GlobalHeader({ onLoginClick }) {
                                 key={link.path}
                                 to={link.path}
                                 className={`text-sm tracking-wide transition-colors duration-300 relative group ${location.pathname === link.path
-                                        ? 'text-[var(--gold)]'
-                                        : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
+                                    ? 'text-[var(--gold)]'
+                                    : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
                                     }`}
                             >
                                 {link.label}
@@ -72,7 +72,7 @@ export function GlobalHeader({ onLoginClick }) {
                             Login
                         </button>
                         <Link
-                            to="/how-to-buy"
+                            to="/buy-coins"
                             className="px-6 py-2 text-sm text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-xl font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:scale-105"
                         >
                             Buy Coins
@@ -106,8 +106,8 @@ export function GlobalHeader({ onLoginClick }) {
                                     to={link.path}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={`text-sm py-2 ${location.pathname === link.path
-                                            ? 'text-[var(--gold)]'
-                                            : 'text-[var(--text-secondary)]'
+                                        ? 'text-[var(--gold)]'
+                                        : 'text-[var(--text-secondary)]'
                                         }`}
                                 >
                                     {link.label}
@@ -124,7 +124,7 @@ export function GlobalHeader({ onLoginClick }) {
                                     Login
                                 </button>
                                 <Link
-                                    to="/how-to-buy"
+                                    to="/buy-coins"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="px-6 py-2 text-sm text-center text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-full font-medium"
                                 >
