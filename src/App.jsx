@@ -16,7 +16,7 @@ export function App() {
 
     return (
         <Router>
-            <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
+            <div className="min-h-screen text-[var(--text-primary)]">
                 <GlobalHeader onLoginClick={() => setIsLoginModalOpen(true)} />
 
                 <Routes>

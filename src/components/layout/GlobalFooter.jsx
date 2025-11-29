@@ -39,7 +39,7 @@ export function GlobalFooter() {
     ];
 
     return (
-        <footer className="relative bg-[var(--bg-primary)] border-t border-[var(--gold)] mt-32">
+        <footer className="relative bg-[var(--bg-primary)] border-t border-[var(--gold)] mt-16 bg-[var(--bg-primary)]">
             {/* Animated top line */}
             <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
                 <motion.div
@@ -49,24 +49,23 @@ export function GlobalFooter() {
                 />
             </div>
 
-            <div className="w-full mx-auto px-6 lg:px-12 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div className="w-full mx-auto px-4 lg:px-0 py-10 max-w-7xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
                     {/* About Scandic */}
                     <div>
-                        <h3 className="text-lg font-semibold text-[var(--gold)] mb-4 tracking-wide">
+                        <h3 className="text-base font-semibold text-[var(--gold)] mb-3 tracking-wide">
                             About Scandic
                         </h3>
-                        <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
-                            Scandic Coin (SNC) is a regulated utility token connecting
-                            aviation, real estate, data, and lifestyle under one blockchain
-                            ecosystem. Built for real-world value.
+                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-4">
+                            Scandic Coin (SNC) is a regulated utility token connecting aviation,
+                            real estate, data, and lifestyle under one blockchain ecosystem.
                         </p>
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                             {aboutLinks.map((link) => (
                                 <Link
                                     key={link.path}
                                     to={link.path}
-                                    className="block text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors duration-300"
+                                    className="block text-xs text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors"
                                 >
                                     {link.label}
                                 </Link>
@@ -76,15 +75,15 @@ export function GlobalFooter() {
 
                     {/* Ecosystem */}
                     <div>
-                        <h3 className="text-lg font-semibold text-[var(--gold)] mb-4 tracking-wide">
+                        <h3 className="text-base font-semibold text-[var(--gold)] mb-3 tracking-wide">
                             Ecosystem
                         </h3>
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                             {ecosystemLinks.map((link) => (
                                 <Link
                                     key={link.path}
                                     to={link.path}
-                                    className="block text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors duration-300"
+                                    className="block text-xs text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors"
                                 >
                                     {link.label}
                                 </Link>
@@ -94,15 +93,15 @@ export function GlobalFooter() {
 
                     {/* Legal */}
                     <div>
-                        <h3 className="text-lg font-semibold text-[var(--gold)] mb-4 tracking-wide">
+                        <h3 className="text-base font-semibold text-[var(--gold)] mb-3 tracking-wide">
                             Legal
                         </h3>
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                             {legalLinks.map((link) => (
                                 <Link
                                     key={link.path}
                                     to={link.path}
-                                    className="block text-sm text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors duration-300"
+                                    className="block text-xs text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors"
                                 >
                                     {link.label}
                                 </Link>
@@ -110,23 +109,23 @@ export function GlobalFooter() {
                         </div>
                     </div>
 
-                    {/* Connect */}
+                    {/* Contact */}
                     <div>
-                        <h3 className="text-lg font-semibold text-[var(--gold)] mb-4 tracking-wide">
+                        <h3 className="text-base font-semibold text-[var(--gold)] mb-3 tracking-wide">
                             Connect
                         </h3>
-                        <p className="text-sm text-[var(--text-secondary)] mb-6">
+                        <p className="text-xs text-[var(--text-secondary)] mb-4">
                             Join the global network shaping real-world blockchain finance.
                         </p>
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-3">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.label}
                                     href={social.href}
                                     aria-label={social.label}
-                                    className="w-10 h-10 rounded-full border border-[var(--gold)] flex items-center justify-center text-[var(--gold)] transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)] hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                                    className="w-8 h-8 rounded-full border border-[var(--gold)] flex items-center justify-center text-[var(--gold)] text-xs transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
                                 >
-                                    <social.icon size={18} />
+                                    <social.icon size={16} />
                                 </a>
                             ))}
                         </div>
@@ -134,24 +133,23 @@ export function GlobalFooter() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="pt-8 border-t border-[var(--gold)]/20">
-                    <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                        <p className="text-sm text-[var(--text-tertiary)] text-center md:text-left">
-                            © 2025 Scandic Group • All Rights Reserved • Designed for
-                            Transparency • Built for Value
+                <div className="pt-6 border-t border-[var(--gold)]">
+                    <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+                        <p className="text-xs text-[var(--text-tertiary)] text-center md:text-left">
+                            © 2025 Scandic Group • All Rights Reserved
                         </p>
-                        <div className="flex items-center space-x-4">
-                            <select className="bg-transparent border border-[var(--gold)]/30 text-[var(--text-secondary)] text-sm px-4 py-2 rounded-full focus:outline-none focus:border-[var(--gold)]">
-                                <option>English</option>
-                                <option>Español</option>
-                                <option>Français</option>
-                                <option>Deutsch</option>
-                            </select>
-                        </div>
+
+                        <select className="bg-transparent border border-[var(--gold)]/30 text-[var(--text-secondary)] text-xs px-3 py-1.5 rounded-full focus:outline-none focus:border-[var(--gold)]">
+                            <option>English</option>
+                            <option>Español</option>
+                            <option>Français</option>
+                            <option>Deutsch</option>
+                        </select>
                     </div>
                 </div>
             </div>
         </footer>
+
     );
 }
 

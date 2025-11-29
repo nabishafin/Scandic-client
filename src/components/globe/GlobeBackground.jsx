@@ -36,7 +36,7 @@ export function GlobeBackground() {
             </motion.div>
 
             {/* Gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[var(--bg-primary)]/30 to-[var(--bg-primary)]/80 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[var(--bg-primary)]/10 to-[var(--bg-primary)]/40 pointer-events-none" />
         </motion.div>
     );
 }
