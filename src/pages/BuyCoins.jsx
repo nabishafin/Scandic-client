@@ -176,9 +176,12 @@ const BuyCoins = () => {
                     </div>
                 </div>
 
-                <Button onClick={handleProceedToPayment} size="lg" className="w-full" disabled={amount <= 0}>
-                    Continue to Payment <ArrowRight className="ml-2" size={20} />
-                </Button>
+                <div>
+                    <Button onClick={handleProceedToPayment} size="lg" className="w-full" disabled={amount <= 0}>
+                        Continue to Payment
+                    </Button>
+
+                </div>
             </div>}
 
             {/* Step 2: Payment Method */}
@@ -232,7 +235,7 @@ const BuyCoins = () => {
                 </div>
 
                 <Button onClick={handleProceedToReview} size="lg" className="w-full" disabled={!paymentMethod}>
-                    Continue to Review <ArrowRight className="ml-2" size={20} />
+                    Continue to Review
                 </Button>
             </div>}
 
@@ -317,7 +320,7 @@ const BuyCoins = () => {
                 </div>
 
                 <Button onClick={handleConfirmPurchase} size="lg" className="w-full">
-                    Confirm Purchase <CheckCircle className="ml-2" size={20} />
+                    Confirm Purchase
                 </Button>
             </div>}
 
