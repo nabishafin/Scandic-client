@@ -156,49 +156,6 @@ const Contact = () => {
             </div>
         </section>
 
-        {/* Map Section */}
-        <section className="py-32 px-6 ">
-            <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                        Global Presence
-                    </h2>
-                    <p className="text-lg text-white/60">
-                        Headquartered in Dubai with operations worldwide
-                    </p>
-                </div>
-
-                <div className="glass-panel rounded-3xl p-8 h-[500px] relative overflow-hidden">
-                    {/* Simplified world map visualization */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="relative w-full h-full max-w-4xl">
-                            {/* Map placeholder with golden pin */}
-                            <div className="absolute inset-0 opacity-20">
-                                <svg viewBox="0 0 800 400" className="w-full h-full">
-                                    <path d="M 100 200 Q 200 100 400 200 T 700 200" stroke="rgba(217, 183, 94, 0.3)" strokeWidth="2" fill="none" />
-                                </svg>
-                            </div>
-
-                            {/* Dubai Pin */}
-                            <div className="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2">
-                                <div className="relative">
-                                    <div className="w-4 h-4 rounded-full bg-gold animate-pulse" />
-                                    <div className="absolute top-0 left-0 w-4 h-4 rounded-full bg-gold/30 animate-ping" />
-                                </div>
-                                <div className="mt-2 glass-panel rounded-lg px-4 py-2 whitespace-nowrap">
-                                    <div className="text-sm font-semibold text-gold">
-                                        Dubai HQ
-                                    </div>
-                                    <div className="text-xs text-white/60">
-                                        United Arab Emirates
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>;
 }
 export default Contact;

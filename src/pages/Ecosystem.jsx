@@ -293,7 +293,7 @@ const Ecosystem = ({
                             </Button>
                             <Button className='flex items-center gap-2' variant="outline" size="lg">
                                 Connect Wallet
-                                <ArrowRight size={20} />
+
                             </Button>
 
                         </div>

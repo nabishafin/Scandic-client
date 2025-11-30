@@ -237,7 +237,7 @@ const HowToBuy = () => {
                                 </div>
                                 {!exchange.comingSoon && (
                                     <Button variant="outline" className="w-full">
-                                        Trade Now <ArrowRight className="ml-2" size={16} />
+                                        Trade Now
                                     </Button>
                                 )}
                                 {exchange.comingSoon && (
@@ -275,7 +275,7 @@ const HowToBuy = () => {
                         </p>
 
                         <Button size="lg" className="relative z-10">
-                            Buy Scandic Coin Now <ArrowRight className="ml-2" size={20} />
+                            Buy Scandic Coin Now
                         </Button>
                     </div>
                 </div>

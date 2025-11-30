@@ -34,7 +34,7 @@ const Whitepapers = () => {
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
             <div className="absolute inset-0 pointer-events-none opacity-20">
-                <div className="absolute inset-0">
+                {/* <div className="absolute inset-0">
                     {[...Array(100)].map((_, i) => <div key={i} className="absolute text-gold/10 font-mono text-xs" style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
@@ -42,7 +42,7 @@ const Whitepapers = () => {
                     }}>
                         {Math.random() > 0.5 ? '01' : '10'}
                     </div>)}
-                </div>
+                </div> */}
                 <GlobeBackground />
             </div>
 
@@ -58,13 +58,22 @@ const Whitepapers = () => {
         </section>
 
         {/* Tabs Navigation */}
-        <section className="py-16 px-6 sticky top-20 z-40 bg-black/95 backdrop-blur-xl border-b border-gold/30">
+        <section className="py-16 px-6 sticky top-20 z-40 backdrop-blur-xl ">
             <div className="max-w-7xl mx-auto">
                 <div className="flex overflow-x-auto space-x-4 pb-4">
-                    {tabs.map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center space-x-2 px-6 py-3 rounded-full whitespace-nowrap transition-all duration-300 ${activeTab === tab.id ? 'bg-gold text-black' : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'}`}>
-                        <tab.icon size={18} />
-                        <span className="font-medium">{tab.label}</span>
-                    </button>)}
+                    {tabs.map(tab => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`flex items-center space-x-2 px-6 py-3 rounded-full whitespace-nowrap transition-all duration-300 ${activeTab === tab.id
+                                ? 'bg-[var(--gold)] text-black'
+                                : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
+                                }`}
+                        >
+                            <tab.icon size={18} />
+                            <span className="font-medium">{tab.label}</span>
+                        </button>
+                    ))}
                 </div>
             </div>
         </section>
@@ -138,7 +147,7 @@ const Whitepapers = () => {
 
                         <div className="mt-12 pt-8 border-t border-gold/20">
                             <Button size="lg">
-                                <Download className="mr-2" size={20} />
+
                                 Download Full Whitepaper (PDF)
                             </Button>
                         </div>
@@ -471,7 +480,7 @@ const Whitepapers = () => {
         </section>
 
         {/* Closing Note */}
-        <section className="py-32 px-6 bg-gradient-to-b from-transparent to-black/50">
+        <section className="py-32 px-6  ">
             <div className="max-w-4xl mx-auto">
                 <div className="glass-panel rounded-3xl p-12 text-center">
                     <h2 className="text-3xl font-display font-bold text-white mb-6">
