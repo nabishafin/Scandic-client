@@ -1,19 +1,45 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { GlobeBackground } from '../globe/GlobeBackground';
 import { GlassPanel } from '../ui/GlassPanel';
 import { Button } from '../ui/Button';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
+import { useLoginMutation } from '../../redux/api/authApi';
+import { setLogin } from '../../redux/slices/authSlice';
 
 export function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [login, { isLoading }] = useLoginMutation();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here
-        console.log('Login attempt:', { email, password });
+
+        try {
+            const result = await login({ email, password }).unwrap();
+
+            // Store tokens in localStorage
+            localStorage.setItem('token', result.accessToken);
+            localStorage.setItem('refreshToken', result.refreshToken);
+
+            // Save user data in Redux store
+            dispatch(setLogin({
+                user: result.user,
+                token: result.accessToken,
+                refreshToken: result.refreshToken
+            }));
+
+            console.log('Login successful:', result);
+
+            // Navigate to home page
+            navigate('/');
+        } catch (error) {
+            console.error('Login failed:', error);
+            alert(error?.data?.message || 'Login failed. Please check your credentials.');
+        }
     };
 
     return (
@@ -47,6 +73,7 @@ export function Login() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Enter your email"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
@@ -74,13 +101,14 @@ export function Login() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Enter your password"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
 
-                        <Button type="submit" className="w-full justify-center group">
-                            Sign In
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <Button type="submit" className="w-full justify-center group" disabled={isLoading}>
+                            {isLoading ? 'Signing In...' : 'Sign In'}
+                            {!isLoading && <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />}
                         </Button>
                     </form>
 

@@ -12,8 +12,11 @@ import Whitepapers from './pages/Whitepapers';
 import Contact from './pages/Contact';
 import { Login } from './components/auth/Login';
 import { Register } from './components/auth/Register';
+import { VerifyEmail } from './components/auth/VerifyEmail';
 import { ForgotPassword } from './components/auth/ForgotPassword';
+import { ResetPassword } from './components/auth/ResetPassword';
 import { OTPVerification } from './components/auth/OTPVerification';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 
 export function App() {
     return (
@@ -27,12 +30,18 @@ export function App() {
                     <Route path="/roadmap" element={<Roadmap />} />
                     <Route path="/ecosystem" element={<Ecosystem />} />
                     <Route path="/how-to-buy" element={<HowToBuy />} />
-                    <Route path="/buy-coins" element={<BuyCoins />} />
+                    <Route path="/buy-coins" element={
+                        <ProtectedRoute>
+                            <BuyCoins />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/whitepapers" element={<Whitepapers />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/verify-email" element={<VerifyEmail />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/verify-otp" element={<OTPVerification />} />
                 </Routes>
 

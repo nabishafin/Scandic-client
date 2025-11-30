@@ -1,21 +1,39 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { GlobeBackground } from '../globe/GlobeBackground';
 import { GlassPanel } from '../ui/GlassPanel';
 import { Button } from '../ui/Button';
-import { Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { User, Mail, Lock, ArrowRight } from 'lucide-react';
+import { useRegisterMutation } from '../../redux/api/authApi';
 
 export function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+    const [register, { isLoading }] = useRegisterMutation();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle register logic here
-        console.log('Register attempt:', { name, email, password, confirmPassword });
+
+        // Validate passwords match
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        try {
+            const result = await register({ name, email, password }).unwrap();
+            console.log('Registration successful:', result);
+
+            // Navigate to verify email page
+            navigate('/verify-email', { state: { email } });
+        } catch (error) {
+            console.error('Registration failed:', error);
+            alert(error?.data?.message || 'Registration failed. Please try again.');
+        }
     };
 
     return (
@@ -49,6 +67,7 @@ export function Register() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Enter your full name"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
@@ -68,6 +87,7 @@ export function Register() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Enter your email"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
@@ -87,6 +107,7 @@ export function Register() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Create a password"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
@@ -106,13 +127,14 @@ export function Register() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Confirm your password"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
 
-                        <Button type="submit" className="w-full justify-center group">
-                            Create Account
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <Button type="submit" className="w-full justify-center group" disabled={isLoading}>
+                            {isLoading ? 'Creating Account...' : 'Create Account'}
+                            {!isLoading && <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />}
                         </Button>
                     </form>
 
