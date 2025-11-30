@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export function GlobalHeader({ onLoginClick }) {
+export function GlobalHeader() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
@@ -12,37 +12,41 @@ export function GlobalHeader({ onLoginClick }) {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
+
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+    }, [location]);
+
     const navLinks = [
-        { path: '/', label: 'Home' },
-        { path: '/about', label: 'About & Team' },
-        { path: '/roadmap', label: 'Roadmap' },
-        { path: '/ecosystem', label: 'Ecosystem & Use Cases' },
-        { path: '/how-to-buy', label: 'How to Buy' },
-        { path: '/whitepapers', label: 'Whitepapers' },
-        { path: '/contact', label: 'Contact' },
+        { name: 'About', path: '/about' },
+        { name: 'Roadmap', path: '/roadmap' },
+        { name: 'Ecosystem', path: '/ecosystem' },
+        { name: 'Whitepapers', path: '/whitepapers' },
+        { name: 'Contact', path: '/contact' },
     ];
 
     return (
         <motion.header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[var(--bg-primary)] border-b border-[var(--gold)]' : 'bg-transparent'
-                }`}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--gold)]/10' : 'bg-transparent'
+                }`}
         >
             <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-3 group">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--gold-light)] to-[var(--gold-dark)] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                            <span className="text-[var(--bg-primary)] font-bold text-lg">S</span>
+                        <div className="relative w-10 h-10">
+                            <div className="absolute inset-0 bg-[var(--gold)] rounded-full opacity-20 group-hover:animate-ping" />
+                            <div className="absolute inset-0 border-2 border-[var(--gold)] rounded-full animate-spin-slow" />
+                            <div className="absolute inset-2 bg-[var(--gold)] rounded-full" />
                         </div>
-                        <span className="text-xl font-semibold text-[var(--gold)] tracking-wide">
-                            SCANDIC COIN
+                        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)]">
+                            SCANDIC
                         </span>
                     </Link>
 
@@ -50,27 +54,26 @@ export function GlobalHeader({ onLoginClick }) {
                     <nav className="hidden xl:flex items-center space-x-8">
                         {navLinks.map((link) => (
                             <Link
-                                key={link.path}
+                                key={link.name}
                                 to={link.path}
-                                className={`text-sm tracking-wide transition-colors duration-300 relative group ${location.pathname === link.path
-                                    ? 'text-[var(--gold)]'
-                                    : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
+                                className={`text-sm font-medium transition-colors duration-300 ${location.pathname === link.path
+                                        ? 'text-[var(--gold)]'
+                                        : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
                                     }`}
                             >
-                                {link.label}
-                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--gold)] transition-all duration-300 group-hover:w-full" />
+                                {link.name}
                             </Link>
                         ))}
                     </nav>
 
                     {/* Right Actions */}
                     <div className="hidden lg:flex items-center space-x-4">
-                        <button
-                            onClick={onLoginClick}
+                        <Link
+                            to="/login"
                             className="px-6 py-2 text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
                         >
                             Login
-                        </button>
+                        </Link>
                         <Link
                             to="/buy-coins"
                             className="px-6 py-2 text-sm text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-xl font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:scale-105"
@@ -97,36 +100,31 @@ export function GlobalHeader({ onLoginClick }) {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="xl:hidden bg-[var(--bg-secondary)] border-t border-[var(--gold)]"
+                        className="xl:hidden bg-[var(--bg-secondary)] border-b border-[var(--gold)]/10 overflow-hidden"
                     >
                         <nav className="flex flex-col px-6 py-4 space-y-4">
                             {navLinks.map((link) => (
                                 <Link
-                                    key={link.path}
+                                    key={link.name}
                                     to={link.path}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className={`text-sm py-2 ${location.pathname === link.path
-                                        ? 'text-[var(--gold)]'
-                                        : 'text-[var(--text-secondary)]'
+                                    className={`text-sm font-medium transition-colors duration-300 ${location.pathname === link.path
+                                            ? 'text-[var(--gold)]'
+                                            : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
                                         }`}
                                 >
-                                    {link.label}
+                                    {link.name}
                                 </Link>
                             ))}
-                            <div className="flex flex-col space-y-3 pt-4 border-t border-[var(--gold)]">
-                                <button
-                                    onClick={() => {
-                                        onLoginClick();
-                                        setIsMobileMenuOpen(false);
-                                    }}
-                                    className="px-6 py-2 text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-full"
+                            <div className="pt-4 flex flex-col space-y-3">
+                                <Link
+                                    to="/login"
+                                    className="w-full px-6 py-3 text-center text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
                                 >
                                     Login
-                                </button>
+                                </Link>
                                 <Link
                                     to="/buy-coins"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="px-6 py-2 text-sm text-center text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-full font-medium"
+                                    className="w-full px-6 py-3 text-center text-sm text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-xl font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.5)]"
                                 >
                                     Buy Coins
                                 </Link>
@@ -138,5 +136,3 @@ export function GlobalHeader({ onLoginClick }) {
         </motion.header>
     );
 }
-
-export default GlobalHeader;

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import GlobalHeader from './components/layout/GlobalHeader';
+import { GlobalHeader } from './components/layout/GlobalHeader';
 import GlobalFooter from './components/layout/GlobalFooter';
-import LoginModal from './components/layout/LoginModal';
 import Home from './pages/Home';
 import About from './pages/About';
 import Roadmap from './pages/Roadmap';
@@ -11,14 +10,16 @@ import HowToBuy from './pages/HowToBuy';
 import BuyCoins from './pages/BuyCoins';
 import Whitepapers from './pages/Whitepapers';
 import Contact from './pages/Contact';
+import { Login } from './components/auth/Login';
+import { Register } from './components/auth/Register';
+import { ForgotPassword } from './components/auth/ForgotPassword';
+import { OTPVerification } from './components/auth/OTPVerification';
 
 export function App() {
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
     return (
         <Router>
             <div className="min-h-screen text-[var(--text-primary)]">
-                <GlobalHeader onLoginClick={() => setIsLoginModalOpen(true)} />
+                <GlobalHeader />
 
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -29,11 +30,13 @@ export function App() {
                     <Route path="/buy-coins" element={<BuyCoins />} />
                     <Route path="/whitepapers" element={<Whitepapers />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/verify-otp" element={<OTPVerification />} />
                 </Routes>
 
                 <GlobalFooter />
-
-                <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
             </div>
         </Router>
     );
