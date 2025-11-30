@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { GlobeBackground } from '../globe/GlobeBackground';
 import { GlassPanel } from '../ui/GlassPanel';
 import { Button } from '../ui/Button';
 import { Mail, ArrowRight, ArrowLeft } from 'lucide-react';
+import { useForgotPasswordMutation } from '../../redux/api/authApi';
 
 export function ForgotPassword() {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+    const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle forgot password logic here (send OTP to email)
-        console.log('Sending 6-digit code to:', email);
-        // Navigate to OTP verification page
-        navigate('/verify-otp');
+
+        try {
+            await forgotPassword({ email }).unwrap();
+            console.log('OTP sent to:', email);
+            // Navigate to reset password page with email
+            navigate('/reset-password', { state: { email } });
+        } catch (error) {
+            console.error('Forgot password failed:', error);
+            alert(error?.data?.message || 'Failed to send reset code. Please try again.');
+        }
     };
 
     return (
@@ -49,13 +56,14 @@ export function ForgotPassword() {
                                     className="w-full bg-[var(--bg-primary)]/50 border border-[var(--gold)]/20 rounded-xl py-3 pl-12 pr-4 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50 focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-all"
                                     placeholder="Enter your email"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
 
-                        <Button type="submit" className="w-full justify-center group">
-                            Send Verification Code
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <Button type="submit" className="w-full justify-center group" disabled={isLoading}>
+                            {isLoading ? 'Sending Code...' : 'Send Verification Code'}
+                            {!isLoading && <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />}
                         </Button>
                     </form>
 

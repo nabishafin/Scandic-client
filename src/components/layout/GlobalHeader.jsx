@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Menu, X, Coins } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { logout } from '../../redux/slices/authSlice';
 
 export function GlobalHeader() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isAuthenticated, user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -57,8 +62,8 @@ export function GlobalHeader() {
                                 key={link.name}
                                 to={link.path}
                                 className={`text-sm font-medium transition-colors duration-300 ${location.pathname === link.path
-                                        ? 'text-[var(--gold)]'
-                                        : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
+                                    ? 'text-[var(--gold)]'
+                                    : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
                                     }`}
                             >
                                 {link.name}
@@ -68,12 +73,32 @@ export function GlobalHeader() {
 
                     {/* Right Actions */}
                     <div className="hidden lg:flex items-center space-x-4">
-                        <Link
-                            to="/login"
-                            className="px-6 py-2 text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
-                        >
-                            Login
-                        </Link>
+                        {isAuthenticated ? (
+                            <>
+                                <div className="px-4 py-2 text-sm bg-transparent border border-[var(--gold)] rounded-xl flex items-center gap-2 text-[var(--text-primary)]">
+                                    <Coins className="h-4 w-4 text-[var(--gold)]" />
+                                    <span className="font-medium">{user?.tokens || 0}</span>
+                                </div>
+                                <button
+                                    onClick={() => {
+                                        dispatch(logout());
+                                        localStorage.removeItem('token');
+                                        localStorage.removeItem('refreshToken');
+                                        navigate('/');
+                                    }}
+                                    className="px-6 py-2 text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="px-6 py-2 text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
+                            >
+                                Login
+                            </Link>
+                        )}
                         <Link
                             to="/buy-coins"
                             className="px-6 py-2 text-sm text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-xl font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:scale-105"
@@ -108,20 +133,41 @@ export function GlobalHeader() {
                                     key={link.name}
                                     to={link.path}
                                     className={`text-sm font-medium transition-colors duration-300 ${location.pathname === link.path
-                                            ? 'text-[var(--gold)]'
-                                            : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
+                                        ? 'text-[var(--gold)]'
+                                        : 'text-[var(--text-secondary)] hover:text-[var(--gold)]'
                                         }`}
                                 >
                                     {link.name}
                                 </Link>
                             ))}
                             <div className="pt-4 flex flex-col space-y-3">
-                                <Link
-                                    to="/login"
-                                    className="w-full px-6 py-3 text-center text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
-                                >
-                                    Login
-                                </Link>
+                                {isAuthenticated ? (
+                                    <>
+                                        <div className="w-full px-4 py-3 text-center text-sm bg-transparent border border-[var(--gold)] rounded-xl flex items-center justify-center gap-2 text-[var(--text-primary)]">
+                                            <Coins className="h-4 w-4 text-[var(--gold)]" />
+                                            <span className="font-medium">{user?.tokens || 0} Tokens</span>
+                                        </div>
+                                        <button
+                                            onClick={() => {
+                                                dispatch(logout());
+                                                localStorage.removeItem('token');
+                                                localStorage.removeItem('refreshToken');
+                                                navigate('/');
+                                                setIsMobileMenuOpen(false);
+                                            }}
+                                            className="w-full px-6 py-3 text-center text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
+                                        >
+                                            Logout
+                                        </button>
+                                    </>
+                                ) : (
+                                    <Link
+                                        to="/login"
+                                        className="w-full px-6 py-3 text-center text-sm text-[var(--text-primary)] border border-[var(--gold)] rounded-xl transition-all duration-300 hover:bg-[var(--gold)] hover:text-[var(--bg-primary)]"
+                                    >
+                                        Login
+                                    </Link>
+                                )}
                                 <Link
                                     to="/buy-coins"
                                     className="w-full px-6 py-3 text-center text-sm text-[var(--bg-primary)] bg-gradient-to-r from-[var(--gold-light)] to-[var(--gold)] rounded-xl font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.5)]"
